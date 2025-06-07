@@ -1,0 +1,6 @@
+@Command_Center_HostAddress = http://localhost:5172
+
+POST {{Command_Center_HostAddress}}/commands/run
+Accept: application/json
+
+###
