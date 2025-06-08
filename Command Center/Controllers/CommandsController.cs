@@ -3,16 +3,33 @@ using System.Diagnostics;
 
 namespace Command_Center.Controllers
 {
+    /// <summary>
+    /// Controller for executing shell commands in a specified directory via HTTP API.
+    /// </summary>
     [ApiController]
     [Route("commands")]
     public class CommandsController : ControllerBase
     {
+        /// <summary>
+        /// Request model for running commands.
+        /// </summary>
         public class CommandRequest
         {
+            /// <summary>
+            /// The working directory where commands will be executed.
+            /// </summary>
             public required string Path { get; set; }
+            /// <summary>
+            /// List of shell commands to execute in sequence.
+            /// </summary>
             public required List<string> Commands { get; set; }
         }
 
+        /// <summary>
+        /// Executes the provided shell commands in the specified path.
+        /// </summary>
+        /// <param name="request">The command request containing path and commands.</param>
+        /// <returns>JSON result with success, output, and error fields.</returns>
         [HttpPost("run")]
         public IActionResult RunCommandsInPath([FromBody] CommandRequest request)
         {

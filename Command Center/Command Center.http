@@ -1,6 +1,34 @@
 @Command_Center_HostAddress = http://localhost:5172
 
+### Run commands in a directory
 POST {{Command_Center_HostAddress}}/commands/run
+Content-Type: application/json
 Accept: application/json
 
-###
+{
+  "path": "/tmp",
+  "commands": [
+    "echo HelloWorld",
+    "ls -la"
+  ]
+}
+
+### Run with missing path (should fail)
+POST {{Command_Center_HostAddress}}/commands/run
+Content-Type: application/json
+Accept: application/json
+
+{
+  "path": "",
+  "commands": ["ls"]
+}
+
+### Run with missing commands (should fail)
+POST {{Command_Center_HostAddress}}/commands/run
+Content-Type: application/json
+Accept: application/json
+
+{
+  "path": "/tmp",
+  "commands": []
+}
